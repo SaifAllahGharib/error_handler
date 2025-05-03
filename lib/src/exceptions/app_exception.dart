@@ -1,8 +1,9 @@
-class AppException<OriginalException> implements Exception {
+class AppException<OriginalException extends Exception> implements Exception {
   final OriginalException exception;
+  final StackTrace? stackTrace;
 
-  AppException({required this.exception});
+  AppException({required this.exception, this.stackTrace});
 
   @override
-  String toString() => exception.toString();
+  String toString() => 'AppException: ${exception.toString()}';
 }

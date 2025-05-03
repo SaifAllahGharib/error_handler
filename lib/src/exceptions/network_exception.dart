@@ -6,11 +6,19 @@ enum AppNetworkExceptionReason {
   responseError,
   serverError,
   noInternet,
+  unknown,
 }
 
 class AppNetworkException<OriginalException extends Exception>
     extends AppException<OriginalException> {
   final AppNetworkExceptionReason reason;
 
-  AppNetworkException({required this.reason, required super.exception});
+  AppNetworkException({
+    required this.reason,
+    required super.exception,
+    super.stackTrace,
+  });
+
+  @override
+  String toString() => 'NetworkException[$reason]: ${exception.toString()}';
 }

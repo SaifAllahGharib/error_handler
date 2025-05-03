@@ -8,9 +8,15 @@ class AppNetworkResponseException<OriginalException extends Exception, T>
   AppNetworkResponseException({
     required super.exception,
     super.reason = AppNetworkExceptionReason.responseError,
+    super.stackTrace,
     this.statusCode,
     this.data,
   });
 
   bool get hasData => data != null;
+
+  @override
+  String toString() =>
+      'NetworkResponseException[${statusCode ?? 'no-status'}]: '
+      '${exception.toString()}';
 }

@@ -15,7 +15,7 @@ T _$identity<T>(T value) => value;
 /// @nodoc
 mixin _$Failure {
 
- Exception get exception; String get message;
+ Exception get exception; String get message; StackTrace? get stackTrace; bool get isCritical; int get retryAttempts;
 /// Create a copy of Failure
 /// with the given fields replaced by the non-null parameter values.
 @JsonKey(includeFromJson: false, includeToJson: false)
@@ -26,16 +26,16 @@ $FailureCopyWith<Failure> get copyWith => _$FailureCopyWithImpl<Failure>(this as
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is Failure&&(identical(other.exception, exception) || other.exception == exception)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is Failure&&(identical(other.exception, exception) || other.exception == exception)&&(identical(other.message, message) || other.message == message)&&(identical(other.stackTrace, stackTrace) || other.stackTrace == stackTrace)&&(identical(other.isCritical, isCritical) || other.isCritical == isCritical)&&(identical(other.retryAttempts, retryAttempts) || other.retryAttempts == retryAttempts));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,exception,message);
+int get hashCode => Object.hash(runtimeType,exception,message,stackTrace,isCritical,retryAttempts);
 
 @override
 String toString() {
-  return 'Failure(exception: $exception, message: $message)';
+  return 'Failure(exception: $exception, message: $message, stackTrace: $stackTrace, isCritical: $isCritical, retryAttempts: $retryAttempts)';
 }
 
 
@@ -46,7 +46,7 @@ abstract mixin class $FailureCopyWith<$Res>  {
   factory $FailureCopyWith(Failure value, $Res Function(Failure) _then) = _$FailureCopyWithImpl;
 @useResult
 $Res call({
- Exception exception, String message
+ Exception exception, String message, StackTrace? stackTrace, bool isCritical, int retryAttempts
 });
 
 
@@ -63,11 +63,14 @@ class _$FailureCopyWithImpl<$Res>
 
 /// Create a copy of Failure
 /// with the given fields replaced by the non-null parameter values.
-@pragma('vm:prefer-inline') @override $Res call({Object? exception = null,Object? message = null,}) {
+@pragma('vm:prefer-inline') @override $Res call({Object? exception = null,Object? message = null,Object? stackTrace = freezed,Object? isCritical = null,Object? retryAttempts = null,}) {
   return _then(_self.copyWith(
 exception: null == exception ? _self.exception : exception // ignore: cast_nullable_to_non_nullable
 as Exception,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+as String,stackTrace: freezed == stackTrace ? _self.stackTrace : stackTrace // ignore: cast_nullable_to_non_nullable
+as StackTrace?,isCritical: null == isCritical ? _self.isCritical : isCritical // ignore: cast_nullable_to_non_nullable
+as bool,retryAttempts: null == retryAttempts ? _self.retryAttempts : retryAttempts // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
@@ -78,11 +81,14 @@ as String,
 
 
 class _Failure implements Failure {
-  const _Failure({required this.exception, required this.message});
+  const _Failure({required this.exception, required this.message, this.stackTrace, this.isCritical = false, this.retryAttempts = 0});
   
 
 @override final  Exception exception;
 @override final  String message;
+@override final  StackTrace? stackTrace;
+@override@JsonKey() final  bool isCritical;
+@override@JsonKey() final  int retryAttempts;
 
 /// Create a copy of Failure
 /// with the given fields replaced by the non-null parameter values.
@@ -94,16 +100,16 @@ _$FailureCopyWith<_Failure> get copyWith => __$FailureCopyWithImpl<_Failure>(thi
 
 @override
 bool operator ==(Object other) {
-  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Failure&&(identical(other.exception, exception) || other.exception == exception)&&(identical(other.message, message) || other.message == message));
+  return identical(this, other) || (other.runtimeType == runtimeType&&other is _Failure&&(identical(other.exception, exception) || other.exception == exception)&&(identical(other.message, message) || other.message == message)&&(identical(other.stackTrace, stackTrace) || other.stackTrace == stackTrace)&&(identical(other.isCritical, isCritical) || other.isCritical == isCritical)&&(identical(other.retryAttempts, retryAttempts) || other.retryAttempts == retryAttempts));
 }
 
 
 @override
-int get hashCode => Object.hash(runtimeType,exception,message);
+int get hashCode => Object.hash(runtimeType,exception,message,stackTrace,isCritical,retryAttempts);
 
 @override
 String toString() {
-  return 'Failure(exception: $exception, message: $message)';
+  return 'Failure(exception: $exception, message: $message, stackTrace: $stackTrace, isCritical: $isCritical, retryAttempts: $retryAttempts)';
 }
 
 
@@ -114,7 +120,7 @@ abstract mixin class _$FailureCopyWith<$Res> implements $FailureCopyWith<$Res> {
   factory _$FailureCopyWith(_Failure value, $Res Function(_Failure) _then) = __$FailureCopyWithImpl;
 @override @useResult
 $Res call({
- Exception exception, String message
+ Exception exception, String message, StackTrace? stackTrace, bool isCritical, int retryAttempts
 });
 
 
@@ -131,11 +137,14 @@ class __$FailureCopyWithImpl<$Res>
 
 /// Create a copy of Failure
 /// with the given fields replaced by the non-null parameter values.
-@override @pragma('vm:prefer-inline') $Res call({Object? exception = null,Object? message = null,}) {
+@override @pragma('vm:prefer-inline') $Res call({Object? exception = null,Object? message = null,Object? stackTrace = freezed,Object? isCritical = null,Object? retryAttempts = null,}) {
   return _then(_Failure(
 exception: null == exception ? _self.exception : exception // ignore: cast_nullable_to_non_nullable
 as Exception,message: null == message ? _self.message : message // ignore: cast_nullable_to_non_nullable
-as String,
+as String,stackTrace: freezed == stackTrace ? _self.stackTrace : stackTrace // ignore: cast_nullable_to_non_nullable
+as StackTrace?,isCritical: null == isCritical ? _self.isCritical : isCritical // ignore: cast_nullable_to_non_nullable
+as bool,retryAttempts: null == retryAttempts ? _self.retryAttempts : retryAttempts // ignore: cast_nullable_to_non_nullable
+as int,
   ));
 }
 
